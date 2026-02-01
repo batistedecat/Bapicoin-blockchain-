@@ -7,7 +7,7 @@ BapiCoin is a deliberately simple blockchain implementation written in Python us
 I build it for educational purposes; not for security, performance or real-world deployment.
 
 This project exists to make blockchains understandable by stripping them down to their essential moving parts:
-hashes, blocks, Proof of Work, transactions, and consensus.
+hashes, blocks, Proof of Work, transactions and consensus.
 
 ---
 
@@ -18,7 +18,7 @@ How does it work?
 
 Is it money? No it isn't! It does not meet the macro-economic definition of money!
 
-Instead of pretending to know what it is, I decided to build a simple blockchain myself. This project focuses on the core ideas, like blocks, hashes, Proof of Work, transactions, and consensus. The goal is learning, not building a real cryptocurrency.
+Instead of pretending to know what it is, I decided to build a simple blockchain myself that focuses on the core ideas.
 
 ---
 
@@ -91,11 +91,11 @@ block = {
 
 ### Block Fields Explained
 
-* **index** — position of the block in the chain
-* **timestamp** — time the block was created
-* **transactions** — list of transactions stored in the block
-* **proof** — Proof of Work result
-* **previous_hash** — cryptographic hash of the previous block
+* **index** : position of the block in the chain
+* **timestamp** : time the block was created
+* **transactions** : list of transactions stored in the block
+* **proof** : Proof of Work result
+* **previous_hash** : cryptographic hash of the previous block
 
 The `previous_hash` field is what links blocks together and makes tampering detectable.
 
@@ -115,8 +115,8 @@ Transactions are sent to the node and placed into a transaction pool.
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "sender": "d4ee26eee15148ee92c6cd394edd974e",
-  "recipient": "someone-other-address",
-  "amount": 5
+  "recipient": "your0friends0adress",
+  "amount": 67
 }' http://localhost:5001/transactions/new
 ```
 
