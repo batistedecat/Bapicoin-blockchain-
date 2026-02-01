@@ -43,7 +43,7 @@ pip install flask
 Start the server by running:
 
 ```bash
-python3 blockchain.py
+python3 bapicoin.py
 ```
 
 You should see output similar to:
