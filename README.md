@@ -93,7 +93,7 @@ The `previous_hash` field is what links blocks together and makes tampering dete
 ## Interacting with the Blockchain from the Terminal
 
 All interaction with the blockchain happens through HTTP requests.
-You can use tools like `curl` or Postman. The examples below use `curl`.
+You can use tools like `curl` or Postman. The examples below use `curl` because i do not know how to use Postman yet.
 
 ---
 
