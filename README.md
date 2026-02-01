@@ -16,7 +16,7 @@ A few years ago, blockchain and cryptocurrencies came up a lot. You heard about 
 I still wanted to know what people were actually talking about back then. What is a blockchain really? 
 How does it work? 
 
-Is it money? No it isn't!
+Is it money? No it isn't! It does not meet the macro-economic definition of money!
 
 Instead of pretending to know what it is, I decided to build a simple blockchain myself. This project focuses on the core ideas, like blocks, hashes, Proof of Work, transactions, and consensus. The goal is learning, not building a real cryptocurrency.
 
