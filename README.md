@@ -4,7 +4,7 @@
 # BapiCoin — A Minimal Educational Blockchain in Python
 
 BapiCoin is a deliberately simple blockchain implementation written in Python using Flask.  
-I build it for educational purposes; not for security, performance, or real-world deployment.
+I build it for educational purposes; not for security, performance or real-world deployment.
 
 This project exists to make blockchains understandable by stripping them down to their essential moving parts:
 hashes, blocks, Proof of Work, transactions, and consensus.
