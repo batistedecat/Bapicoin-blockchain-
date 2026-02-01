@@ -4,9 +4,6 @@ import json
 from uuid import uuid4
 from flask import Flask, jsonify, request
 
-
-
-
 class Blockchain:
     def __init__(self):
         self.chain = []
@@ -55,7 +52,8 @@ class Blockchain:
     def valid_proof(last_proof, proof):
         guess = f'{last_proof}{proof}'.encode()
         geuss_hash = hasher.sha256(guess).hexdigest()
-        return geuss_hash[:4] == '000'
+        return geuss_hash[1] == '0'
+
 
 app = Flask(__name__)
 
@@ -71,9 +69,6 @@ def full_chain():
         "length": len(bapicoin.chain)
     }
     return jsonify(response), 200
-#run server on port 5000
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port = 5000)
 
 #transaction endpoint
 @app.route('/transactions/new', methods=['POST'])
@@ -99,7 +94,7 @@ def mine():
     last_proof = last_block['proof']
     proof = bapicoin.proof_of_work(last_proof)
     bapicoin.new_transaction(
-        sender = "00000",
+        sender = "0",
         recipient = node_indentifier,
         amount = 3
     )
@@ -115,3 +110,7 @@ def mine():
         'previous_hash': block['previous_hash'],
     }
     return jsonify(response), 200
+
+#run server on port 5000
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port = 5000)
