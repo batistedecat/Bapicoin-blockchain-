@@ -46,10 +46,15 @@ with st.form("Transaction Form"):
 
     submitted = st.form_submit_button('--- register payment ---')
     if submitted:
-        st.success("Succesfully submitted :)", icon="✅")
 
-temp_transaction["sender"] = sender
-temp_transaction["recipient"] = recipient
-temp_transaction["amount"] = amount
 
-url_post = url + "transactions/new"
+        temp_transaction["sender"] = sender
+        temp_transaction["recipient"] = recipient
+        temp_transaction["amount"] = amount
+
+        url_post = url + "/transactions/new"
+
+        response = requests.post(url_post, json = temp_transaction)
+        response.raise_for_status()
+        json_response = response.json()
+        st.success(json_response["message"], icon="✅")
