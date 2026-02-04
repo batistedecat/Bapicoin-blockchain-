@@ -27,8 +27,8 @@ class Blockchain:
             'proof': proof,
             'previous_hash': previous_hash or self.hash_block(self.chain[-1]),
         }
-        self.current_transactions[:] = []
         self.chain.append(block)
+        self.current_transactions = []
         return block
 
     def new_transaction(self, sender, recipient, amount):
@@ -143,7 +143,7 @@ def mine():
     last_proof = last_block['proof']
     proof = bapicoin.proof_of_work(last_proof)
     bapicoin.new_transaction(
-        sender = "0",
+        sender = "system",
         recipient = node_indentifier,
         amount = 3
     )
