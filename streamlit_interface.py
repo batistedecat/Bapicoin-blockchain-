@@ -2,17 +2,31 @@
 #by: Batiste Decat
 #status: not finished !!!!!
 #notes: still learning streamlit library
-import time
+from time import sleep
 
+import atexit
+import subprocess
 import streamlit as st
 import requests
-from time import sleep
 
 st.title('BapiCoin', text_alignment="center")
 st.header('A Minimal Educational Blockchain in Python')
 st.subheader("features mining, transactions and viewing the full chain", divider="gray")
 
 url = "http://127.0.0.1:5001"
+
+def start_bapicoin_node():
+    process = subprocess.Popen(["python", "bapicoin.py"])
+    return process
+
+def cleanup_node():
+    if "server_process" in st.session_state:
+        st.session_state.server_process.terminate()
+        #wait then force kill if needed
+        try:
+            st.session_state.server_process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            st.session_state.server_process.kill()
 
 def view_full_chain():
     if st.button("view full Chain"):
@@ -60,15 +74,26 @@ def transaction_form(form):
             my_bar = st.progress(0, text=progress_text)
 
             for percent_complete in range(100):
-                time.sleep(0.005)
+                sleep(0.005)
                 my_bar.progress(percent_complete + 1, text=progress_text)
-            time.sleep(1)
+            sleep(1)
             my_bar.empty()
 
             st.success(json_response["message"], icon="✅")
+            sleep(1.5)
             st.rerun()
 
 ###------------------------------------
+
+if "server_started" not in st.session_state:
+    with st.spinner("Starting the bapicoin node...", show_time=True):
+        st.session_state.server_process = start_bapicoin_node()
+        st.session_state.server_started = True
+
+        atexit.register(cleanup_node) #is there a zombie process? if yes than kill it
+
+        sleep(2)
+        st.toast('node succesfully initiated')
 
 transaction_form("form_1")
 
@@ -79,4 +104,4 @@ with col1:
 with col2:
     mine_it()
 
-st.button('RESET Buttons', type="primary")
+st.button('RESET', type="primary")
