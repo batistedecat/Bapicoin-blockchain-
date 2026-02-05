@@ -47,7 +47,6 @@ There you can:
 - add new transactions
 - mine new blocks and receive a mining reward
 
-![video](demo%20frontend.mp4)
 ---
 
 ## Local Installation
