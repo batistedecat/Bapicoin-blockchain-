@@ -4,6 +4,7 @@ import json
 from uuid import uuid4
 from flask import Flask, jsonify, request
 from urllib.parse import urlparse
+import requests
 
 
 class Blockchain:
@@ -90,7 +91,7 @@ class Blockchain:
         max_length = len(self.chain)
 
         for node in buren:
-            response = request.get(f'http://{node}/chain')
+            response = requests.get(f'http://{node}/chain')
 
             if response.status_code == 200: #200 = OK
                 length = response.json()['length'] #length of that node

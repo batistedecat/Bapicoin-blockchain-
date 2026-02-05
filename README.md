@@ -36,38 +36,44 @@ Instead of pretending to know what it is, I decided to build a simple blockchain
 
 ---
 
-## Requirements
+## Live Frontend
 
-- Python 3.7 or newer, i used 3.14
-- Flask
+You can interact with the blockchain via the live Streamlit application.
 
-Install dependencies:
+👉 **https://bapicoin.streamlit.app**
 
-```bash
-pip install flask
-````
-
----
-
-## Running the Blockchain Node
-
-Start the server by running:
-
-```bash
-python3 bapicoin.py
-```
-
-You should see output similar to:
-
-```text
-Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
-```
-
-Each node generates a unique identifier (UUID) that is used to receive mining rewards.
+There you can:
+- inspect the current blockchain
+- add new transactions
+- mine new blocks and receive a mining reward
 
 ---
 
-## Blockchain Data Structure
+## Local Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/batistedecat/Bapicoin-blockchain-.git
+   cd Bapicoin-blockchain-
+
+2. Install dependencies:
+      ```bash
+       pip install requirements.txt
+      ```
+   
+3. start a blockchain node locally:
+    ```bash
+    python3 bapicoin.py
+   ```
+   You should see output similar to:
+   ```text
+   Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+   ```
+
+    Each node generates a unique identifier (UUID) that is used to receive mining rewards.
+
+
+## About the Blockchain Data Structure
 
 Each block is a plain Python dictionary serialized to JSON.
 
@@ -199,7 +205,7 @@ If a longer valid chain is found among registered nodes, the local chain is repl
 The Proof of Work algorithm searches for a number such that:
 
 ```
-SHA256(last_proof + proof) starts with "00"
+SHA256(last_proof + proof) starts with "00000"
 ```
 
 This makes block creation computationally expensive while keeping verification fast.
