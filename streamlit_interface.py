@@ -29,13 +29,13 @@ url = "https://bapicoin-blockchain.onrender.com"
 #         except subprocess.TimeoutExpired:
 #             st.session_state.server_process.kill()
 
-def test_connection():
-    try:
-        with st.spinner('Connecting to server, please wait...', show_time=True):
-            requests.get(f"{url}/test_connection")
-
-    except requests.exceptions.RequestException as e:
-        st.error(f"Connection failed: {e}")
+# def test_connection():
+#     try:
+#         with st.spinner('Connecting to server, please wait...', show_time=True):
+#             requests.get(f"{url}/test_connection")
+#
+#     except requests.exceptions.RequestException as e:
+#         st.error(f"Connection failed: {e}")
 
 def view_full_chain():
     if st.button("view full Chain"):
@@ -117,7 +117,7 @@ def transaction_form(form):
 #
 #         sleep(2)
 #         st.toast('node succesfully initiated')
-test_connection()
+# test_connection()
 transaction_form("form_1")
 
 col1, col2 = st.columns(2)
