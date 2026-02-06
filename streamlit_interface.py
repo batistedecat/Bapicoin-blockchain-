@@ -52,6 +52,7 @@ def mine_it():
     if st.button("mine"):
         chain_url = url + '/mine'
         with st.spinner("mining the block...", show_time=True):
+            st.write("When you mine a new block, your device is solving a computationally hard problem. In return you will be rewarded 3 bapicoins by the system.")
             while True:
                 response = requests.get(chain_url)
                 if response.status_code == 200:
