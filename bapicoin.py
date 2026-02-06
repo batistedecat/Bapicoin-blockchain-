@@ -60,7 +60,7 @@ class Blockchain:
     def valid_proof(last_proof, proof):
         guess = f'{last_proof}{proof}'.encode()
         geuss_hash = hasher.sha256(guess).hexdigest()
-        return geuss_hash[:5] == '00'
+        return geuss_hash[:2] == '00'
 
     def valid_chain(self, chain):
         last_block = chain[0] #assumes the genesis block is trusted
