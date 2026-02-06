@@ -31,7 +31,9 @@ url = "https://bapicoin-blockchain.onrender.com"
 
 def test_connection():
     try:
-        requests.get(f"{url}/test_connection")
+        with st.spinner('Connecting to server, please wait...', show_time=True):
+            requests.get(f"{url}/test_connection")
+
     except requests.exceptions.RequestException as e:
         st.error(f"Connection failed: {e}")
 
@@ -79,7 +81,7 @@ def transaction_form(form):
 
             url_post = url + "/transactions/new"
             with st.spinner("Connecting to server, please wait...", show_time=True):
-                test_connection()
+
                 while True:
 
                     response = requests.post(url_post, json=temp_transaction)
@@ -99,7 +101,7 @@ def transaction_form(form):
             # my_bar.empty()
 
             st.success(json_response["message"], icon="✅")
-            st.write('ready to mine a block')
+            st.write('Transaction committed in the transaction pool. Mine the next block! :)')
             # sleep(2)
             # st.rerun()
 
@@ -114,7 +116,7 @@ def transaction_form(form):
 #
 #         sleep(2)
 #         st.toast('node succesfully initiated')
-
+test_connection()
 transaction_form("form_1")
 
 col1, col2 = st.columns(2)
