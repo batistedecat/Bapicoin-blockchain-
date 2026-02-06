@@ -134,6 +134,9 @@ def new_transaction():
     response = {"message": f"Transaction will be added to Block number {index}"}
     return jsonify(response), 201
 
+@app.route("/test_connection", methods = ["GET"])
+def test_connection():
+    return {}, 200
 #the Mining endpoint
 ##calculate the Proof of Work
 ##reward the miner by adding a transaction granting (us) 3 coin

@@ -4,10 +4,11 @@
 #notes: still learning streamlit library
 from time import sleep
 
-import atexit
-import subprocess
+# import atexit
+# import subprocess
 import streamlit as st
 import requests
+
 
 st.title('BapiCoin', text_alignment="center")
 st.header('A Minimal Educational Blockchain in Python')
@@ -28,11 +29,21 @@ url = "https://bapicoin-blockchain.onrender.com"
 #         except subprocess.TimeoutExpired:
 #             st.session_state.server_process.kill()
 
+def test_connection():
+    try:
+        requests.get(f"{url}/test_connection")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Connection failed: {e}")
+
 def view_full_chain():
     if st.button("view full Chain"):
+        chain_url = url + '/chain'
         with col1.container(height=600):
-            chain_url = url + '/chain'
-            response = requests.get(chain_url)
+            with st.spinner("loading data...", show_time=True):
+                while True:
+                    response = requests.get(chain_url)
+                    if response.status_code == 200:
+                        break
             st.json(response.text, expanded=False)
 
 def mine_it():
@@ -46,12 +57,14 @@ def mine_it():
         st.json(response.text)
 
 def transaction_form(form):
+
     temp_transaction = {
         "sender": "standard sender id",
         "recipient": "standard recipient id",
         "amount": 0.0
     }
     with st.form(form):
+
         st.write("Transaction Form")
         st.write('Please fill out the info below and submit your transaction into the transaction pool ;)')
         sender = st.text_input('Sender')
@@ -65,9 +78,15 @@ def transaction_form(form):
             temp_transaction["amount"] = amount
 
             url_post = url + "/transactions/new"
+            with st.spinner("Connecting to server, please wait...", show_time=True):
+                test_connection()
+                while True:
 
-            response = requests.post(url_post, json=temp_transaction)
-            response.raise_for_status()
+                    response = requests.post(url_post, json=temp_transaction)
+                    response.raise_for_status()
+                    if response.status_code == 201:
+                        break
+
             json_response = response.json()
 
             progress_text = "Registering Payment, Please wait."
